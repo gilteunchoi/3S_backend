@@ -15,6 +15,7 @@ def index(request):
     data = {
         "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
         "status": "GOOD",
-        "origin-message": str(query_params)
+        "origin-message-params": str(query_params),
+        "origin-message-body": str(body_data)
     }
     return JsonResponse(data, status=200)
