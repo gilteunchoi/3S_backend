@@ -103,7 +103,3 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 checkpoint_callback = ModelCheckpoint("best_model.h5", 
                                       save_best_only=True, 
                                       monitor="val_loss")
-
-hist = model.fit(x_train, y_train, epochs=30, batch_size=64, 
-                 validation_split=0.2, 
-                 callbacks=[checkpoint_callback])

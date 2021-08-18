@@ -7,11 +7,13 @@ from datetime import datetime
 
 @api_view(['GET', 'POST'])
 def index(request):
+    print()
     print("Request:", request)
     query_params = request.query_params.dict()
     body_data = json.loads(request.body)
     print("Params:", query_params)
     print("Body:", body_data)
+    print()
     data = {
         "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
         "status": "GOOD",
@@ -23,11 +25,13 @@ def index(request):
 
 @api_view(['GET', 'POST'])
 def user(request):
+    print()
     print("Request:", request)
     query_params = request.query_params.dict()
     body_data = json.loads(request.body)
     print("Params:", query_params)
     print("Body:", body_data)
+    print()
     data = {
         "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
         "status": "GOOD",
@@ -38,11 +42,13 @@ def user(request):
 
 @api_view(['GET', 'POST'])
 def provider(request):
+    print()
     print("Request:", request)
     query_params = request.query_params.dict()
     body_data = json.loads(request.body)
     print("Params:", query_params)
     print("Body:", body_data)
+    print()
     data = {
         "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
         "status": "GOOD",
