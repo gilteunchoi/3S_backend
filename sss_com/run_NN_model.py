@@ -1,6 +1,13 @@
-from tensorflow.keras.models import Sequential, load_model
+import pandas as pd
+import matplotlib.pyplot as plt
 import numpy as np
-
+import json
+from tensorflow.keras.models import Sequential, load_model
+from tensorflow.keras.layers import Dense, Embedding, LSTM, Flatten
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras.utils import plot_model
+from tensorflow.keras.datasets import imdb
+from tensorflow.keras.utils import plot_model, to_categorical
 
 def convert(blist, rlist, allbssidlist, lengthOfNodes):
   tempnodelist = []
@@ -20,7 +27,7 @@ def convert(blist, rlist, allbssidlist, lengthOfNodes):
   return tempplist
 
 
-def predictEntrace(testbssidlist, testrssilist, allbssidlist, model):
+def predictEntrace(testbssidlist, testrssilist, allbssidlist, the_model):
   lengthOfNodes = len(allbssidlist)
   mappedlist = convert(testbssidlist, testrssilist,
                        allbssidlist, lengthOfNodes)
@@ -29,17 +36,22 @@ def predictEntrace(testbssidlist, testrssilist, allbssidlist, model):
   finallistsample = np.array(mappedlist)
   finallistsample = finallistsample.reshape(
       1, lengthOfNodes).astype('float32')/100
-  rawPrediction = model.predict(finallistsample)
+  rawPrediction = the_model.predict(finallistsample)
   Entrance = rawPrediction.argmax() + 1
   return Entrance
 
 
 def runNNmodel(testbssidlist, testrssilist):
-    model = load_model("best_model.h5")
-    print(model.summary())
+    the_model = load_model("best_model.h5")
+    print(the_model.summary())
 
     with open('allbssidlist.txt', 'r') as f:
-        allbssidlist = f.read()
-        print(allbssidlist)
-        return predictEntrace(testbssidlist, testrssilist, allbssidlist, model)
+        allbssidlist = json.loads(f.read())
+        print(allbssidlist[0])
+        return predictEntrace(testbssidlist, testrssilist, allbssidlist, the_model)
 
+testbssidlist = ["00:23:aa:02:31:b0",	"0a:23:aa:02:31:b2",	"0a:23:aa:02:31:b3",	"06:23:aa:02:31:a2",	"06:23:aa:02:31:a3",	"00:23:aa:02:31:a0",	"06:08:52:7c:d1:02", "06:08:52:7c:d1:03",	"0a:09:b4:76:0f:13",	"06:09:b4:76:0f:13"]
+
+testrssilist = [-45,	-45,	-46,	-48,	-48,	-49,	-51,	-51,	-52,	-52]
+
+print(runNNmodel(testbssidlist, testrssilist))

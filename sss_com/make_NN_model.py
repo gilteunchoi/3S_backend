@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import json
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Embedding, LSTM, Flatten
 from tensorflow.keras.callbacks import ModelCheckpoint
@@ -41,6 +42,7 @@ for i in range(dataLength):
         rlist3.append(df3[j][2*i+1])
         rlist4.append(df4[j][2*i+1])
 
+print(blist1)
 tempblist = blist1 + blist2 + blist3 + blist4  # 모든 bssid 리스트(중복O)
 temprlist = rlist1 + rlist2 + rlist3 + rlist4  # 모든 bssid 리스트(중복O)
 allbssidlist = []  # 모든 bssid 리스트(중복X)
@@ -51,6 +53,10 @@ temprlist = list(map(abs, temprlist))
 for v in tempblist:
     if v not in allbssidlist:
         allbssidlist.append(v)
+
+
+with open('allbssidlist.txt', 'w') as f:
+    f.write(json.dumps(allbssidlist))
 
 lengthOfNodes = len(allbssidlist)  # 노드 갯수
 
@@ -92,6 +98,8 @@ y = list(map(int, y))
 x_train = np.array(finallist)
 y_train = np.array(y)
 
+print(x_train[-1])
+print(y_train)
 
 y_train = to_categorical(y_train)  # 이게 중요
 x_train = x_train.reshape(lengthOfAllWifiList, lengthOfNodes).astype(
@@ -106,5 +114,8 @@ model = Sequential([
 model.compile(loss='categorical_crossentropy',
               optimizer='adam', metrics=['accuracy'])
 
-checkpoint_callback = ModelCheckpoint(
-    "best_model.h5", save_best_only=True, monitor="val_loss")
+checkpoint_callback = ModelCheckpoint("best_model.h5", save_best_only=True, monitor="val_loss")
+
+hist = model.fit(x_train, y_train, epochs=15, batch_size=32, 
+                 validation_split=0.10, 
+                 callbacks=[checkpoint_callback])
