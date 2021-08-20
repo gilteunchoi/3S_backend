@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from datetime import datetime
 from ipware import get_client_ip
-from run_NN_model import runNNmodel
+from sss_com.run_NN_model import runNNmodel
 
 @api_view(['GET', 'POST'])
 def index(request):
