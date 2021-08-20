@@ -42,7 +42,7 @@ def user(request):
         testbssidlist = ["bc:f3:10:33:d5:74","06:23:aa:02:31:02","00:23:aa:64:3e:e5","00:23:aa:02:31:00","06:23:aa:02:31:03",
                  "00:23:aa:02:30:b0","0a:23:aa:02:30:b2","0a:23:aa:02:30:b3","42:2f:86:fa:e1:ac","12:23:aa:b5:6c:3a"]
         testrssilist = [-64, -64, -64, -65,	-65, -65, -66, -66,	-66, -66]
-        runNNmodel(testbssidlist, testrssilist)
+        print(runNNmodel(testbssidlist, testrssilist))
     return JsonResponse(data, status=200)
 
 @api_view(['GET', 'POST'])
