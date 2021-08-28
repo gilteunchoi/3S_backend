@@ -21,23 +21,6 @@ def index(request):
         "origin-message-params": str(query_params),
         "origin-message-body": str(body_data)
     }
-    return JsonResponse(data, status=200)
-
-
-@api_view(['GET', 'POST'])
-def user(request):
-    print("IP:", get_client_ip(request))
-    query_params = request.query_params.dict()
-    body_data = json.loads(request.body)
-    print("Params:", query_params)
-    print("Body:", body_data)
-    print()
-    data = {
-        "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "status": "GOOD",
-        "origin-message-params": str(query_params),
-        "origin-message-body": str(body_data)
-    }
     if True:
         bssid_list = []
         bssid_list.append(body_data["BSSID0"])
@@ -66,7 +49,24 @@ def user(request):
         #         "00:23:aa:02:30:b0","0a:23:aa:02:30:b2","0a:23:aa:02:30:b3","42:2f:86:fa:e1:ac","12:23:aa:b5:6c:3a"]
         #testrssilist = [-64, -64, -64, -65, -65, -65, -66, -66, -66, -66]
         #print(runNNmodel(testbssidlist, testrssilist))
-        print(runNNmodel(bssid_list, rssi_list))
+        print(runNNmodel(bssid_list, rssi_list)) 
+    return JsonResponse(data, status=200)
+
+
+@api_view(['GET', 'POST'])
+def user(request):
+    print("IP:", get_client_ip(request))
+    query_params = request.query_params.dict()
+    body_data = json.loads(request.body)
+    print("Params:", query_params)
+    print("Body:", body_data)
+    print()
+    data = {
+        "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "status": "GOOD",
+        "origin-message-params": str(query_params),
+        "origin-message-body": str(body_data)
+    }
     return JsonResponse(data, status=200)
 
 @api_view(['GET', 'POST'])
