@@ -47,8 +47,9 @@ def runNNmodel(testbssidlist, testrssilist):
 
     with open('allbssidlist.txt', 'r') as f:
         allbssidlist = json.loads(f.read())
-        print(allbssidlist[0])
-        return predictEntrace(testbssidlist, testrssilist, allbssidlist, the_model)
+        ans = predictEntrace(testbssidlist, testrssilist, allbssidlist, the_model)
+        print("Model ans:", ans)
+        return ans
 
 testbssidlist = ["00:23:aa:02:31:b0",	"0a:23:aa:02:31:b2",	"0a:23:aa:02:31:b3",	"06:23:aa:02:31:a2",	"06:23:aa:02:31:a3",	"00:23:aa:02:31:a0",	"06:08:52:7c:d1:02", "06:08:52:7c:d1:03",	"0a:09:b4:76:0f:13",	"06:09:b4:76:0f:13"]
 
