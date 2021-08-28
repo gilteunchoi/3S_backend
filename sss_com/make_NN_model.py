@@ -30,6 +30,7 @@ rlist3 = []
 rlist4 = []
 
 dataLength = int(len(df1)/2)  # 와이파이 측정 횟수 여기서는 100
+#dataLength = int(len(df1)/2)  # 와이파이 측정 횟수 여기서는 100
 
 for i in range(dataLength):
     for j in range(10):
