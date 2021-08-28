@@ -69,12 +69,13 @@ def user(request):
             "origin-message-body": str(body_data),
             "location": tempAns
         }
-        try:
-            print(body_data["Answer"])
-            user_is_waiting = tempAns
-            print("alarm :", user_is_waiting)
-        except:
-            print("just check only")
+        print(body_data["Answer"])
+        # try:
+        #     print(body_data["Answer"])
+        #     user_is_waiting = tempAns
+        #     print("alarm :", user_is_waiting)
+        # except:
+        #     print("just check only")
 
     return JsonResponse(data, status=200)
 
