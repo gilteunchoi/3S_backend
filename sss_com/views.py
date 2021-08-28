@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from datetime import datetime
 from ipware import get_client_ip
+from six import u
 from sss_com.run_NN_model import runNNmodel
 from sss_com.variables import user_is_waiting
 
@@ -60,14 +61,21 @@ def user(request):
         rssi_list.append(body_data["RSSI9"])
 
         global user_is_waiting
-        user_is_waiting = int(runNNmodel(bssid_list, rssi_list))
+        tempAns = int(runNNmodel(bssid_list, rssi_list))
         data = {
             "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
             "status": "GOOD",
             "origin-message-params": str(query_params),
             "origin-message-body": str(body_data),
-            "location": user_is_waiting
+            "location": tempAns
         }
+        try:
+            print(body_data["Answer"])
+            user_is_waiting = tempAns
+            print("alarm :", user_is_waiting)
+        except:
+            print("just check only")
+
     return JsonResponse(data, status=200)
 
 @api_view(['GET', 'POST'])
