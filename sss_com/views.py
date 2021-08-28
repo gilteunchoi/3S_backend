@@ -39,10 +39,34 @@ def user(request):
         "origin-message-body": str(body_data)
     }
     if True:
-        testbssidlist = ["bc:f3:10:33:d5:74","06:23:aa:02:31:02","00:23:aa:64:3e:e5","00:23:aa:02:31:00","06:23:aa:02:31:03",
-                 "00:23:aa:02:30:b0","0a:23:aa:02:30:b2","0a:23:aa:02:30:b3","42:2f:86:fa:e1:ac","12:23:aa:b5:6c:3a"]
-        testrssilist = [-64, -64, -64, -65,	-65, -65, -66, -66,	-66, -66]
-        print(runNNmodel(testbssidlist, testrssilist))
+        bssid_list = []
+        bssid_list.append(body_data["BSSID0"])
+        bssid_list.append(body_data["BSSID1"])
+        bssid_list.append(body_data["BSSID2"])
+        bssid_list.append(body_data["BSSID3"])
+        bssid_list.append(body_data["BSSID4"])
+        bssid_list.append(body_data["BSSID5"])
+        bssid_list.append(body_data["BSSID6"])
+        bssid_list.append(body_data["BSSID7"])
+        bssid_list.append(body_data["BSSID8"])
+        bssid_list.append(body_data["BSSID9"])
+    
+        rssi_list = []
+        rssi_list.append(body_data["RSSI0"])
+        rssi_list.append(body_data["RSSI1"])
+        rssi_list.append(body_data["RSSI2"])
+        rssi_list.append(body_data["RSSI3"])
+        rssi_list.append(body_data["RSSI4"])
+        rssi_list.append(body_data["RSSI5"])
+        rssi_list.append(body_data["RSSI6"])
+        rssi_list.append(body_data["RSSI7"])
+        rssi_list.append(body_data["RSSI8"])
+        rssi_list.append(body_data["RSSI9"])
+        #testbssidlist = ["bc:f3:10:33:d5:74","06:23:aa:02:31:02","00:23:aa:64:3e:e5","00:23:aa:02:31:00","06:23:aa:02:31:03",
+        #         "00:23:aa:02:30:b0","0a:23:aa:02:30:b2","0a:23:aa:02:30:b3","42:2f:86:fa:e1:ac","12:23:aa:b5:6c:3a"]
+        #testrssilist = [-64, -64, -64, -65, -65, -65, -66, -66, -66, -66]
+        #print(runNNmodel(testbssidlist, testrssilist))
+        print(runNNmodel(bssid_list, rssi_list))
     return JsonResponse(data, status=200)
 
 @api_view(['GET', 'POST'])
