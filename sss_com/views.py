@@ -60,7 +60,7 @@ def user(request):
         rssi_list.append(body_data["RSSI9"])
 
         global user_is_waiting
-        user_is_waiting = runNNmodel(bssid_list, rssi_list)
+        user_is_waiting = int(runNNmodel(bssid_list, rssi_list))
         data = {
             "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
             "status": "GOOD",
