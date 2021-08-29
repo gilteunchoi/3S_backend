@@ -89,7 +89,7 @@ def provider(request):
     if body_data["method"] == "look":
         global user_is_waiting
         print(user_is_waiting)
-        if user_is_waiting:
+        if not user_is_waiting:
             data = {
                 "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "status": "GOOD",
