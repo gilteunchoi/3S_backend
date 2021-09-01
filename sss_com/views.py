@@ -129,12 +129,13 @@ def buser(request):
     print()
     data = {}
     global bus_user_is_waiting
-    try:
-        print(body_data["Answer"])
+    if body_data["method"] == "update":
         bus_user_is_waiting = True
-        print("alarm :", bus_user_is_waiting)
-    except:
-        print("just check only")
+        data = {
+            "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "status": "GOOD",
+            "code": "update complete"
+        }
 
     return JsonResponse(data, status=200)
 
