@@ -130,7 +130,7 @@ def buser(request):
     data = {}
     global bus_user_is_waiting
     if body_data["method"] == "update":
-        bus_user_is_waiting = True
+        bus_user_is_waiting = "ok"
         data = {
             "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
             "status": "GOOD",
